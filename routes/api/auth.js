@@ -6,6 +6,8 @@ const { validateBody, authenticate, upload } = require("../../middlewares");
 const router = express.Router();
 
 router.post("/register", validateBody(authSchemas.registerSchema), authCtrls.register);
+router.get("/verify/:verificationToken", authCtrls.verifyEmail);
+router.post("/verify", validateBody(authSchemas.emailSchema), authCtrls.resendVerifyEmail);
 router.post("/login", validateBody(authSchemas.loginSchema), authCtrls.login);
 router.post("/logout", authenticate, authCtrls.logout);
 router.get("/current", authenticate, authCtrls.getCurrent);
